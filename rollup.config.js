@@ -110,6 +110,7 @@ export default {
         }),
     ],
     onwarn,
+    preserveEntrySignatures: 'strict',
   },
 
   server: {
@@ -142,6 +143,7 @@ export default {
       ),
     ],
     onwarn,
+    preserveEntrySignatures: 'strict',
   },
 
   serviceworker: {

@@ -79,8 +79,6 @@
   div {
     width: 250px;
     height: 60px;
-    position: absolute;
-    top: 0;
   }
 </style>
 

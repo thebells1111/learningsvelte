@@ -1,0 +1,16 @@
+{
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "svelteBracketNewLine": true,
+
+  "overrides": [
+    {
+      "files": "content/**",
+      "options": {
+        "printWidth": 70
+      }
+    }
+  ]
+}
