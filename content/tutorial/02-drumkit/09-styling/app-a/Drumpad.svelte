@@ -1,0 +1,20 @@
+<script>
+  export let pad;
+  export let playSound;
+</script>
+
+<div>
+  <button
+    id={pad.displayText}
+    class="drum-pad"
+    on:click={() => playSound(pad)}
+  >
+    <audio
+      bind:this={pad.audioElement}
+      id={pad.id}
+      class="clip"
+      src={pad.soundUrl}
+    />
+    {pad.id}
+  </button>
+</div>
