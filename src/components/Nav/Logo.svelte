@@ -46,13 +46,13 @@
       ctx.save();
 
       // draw the overlay
-      ctx.drawImage(overlay, 0, 0, 250, 60);
+      ctx.drawImage(overlay, 0, 0, 260, 60);
 
       // change composite mode to source-in
       // any new drawing will only overwrite existing pixels
       ctx.globalCompositeOperation = 'source-in';
 
-      ctx.drawImage(logo, 0, 0, 250, 60);
+      ctx.drawImage(logo, 0, 0, 260, 60);
 
       // restore the context to it's original state
       ctx.restore();
@@ -64,12 +64,12 @@
   p {
     color: #f4f4f0;
     font-family: var(--font-title), cursive;
-    font-size: 1.2em;
+    font-size: 1.4em;
     position: relative;
     margin: 0;
     padding: 0;
-    top: 15px;
-    left: 50px;
+    top: 10px;
+    left: 42px;
   }
 
   canvas {
@@ -77,7 +77,7 @@
   }
 
   div {
-    width: 250px;
+    width: 260px;
     height: 60px;
   }
 </style>

@@ -27,7 +27,7 @@
 {#if $page.path !== '/repl/embed'}
   <Nav {segment} {page} title="Learning Svelte">
     <NavItem segment="tutorial">Tutorials</NavItem>
-    <NavItem segment="blog">Blog</NavItem>	
+    <NavItem segment="blog">Blog</NavItem>
   </Nav>
 {/if}
 

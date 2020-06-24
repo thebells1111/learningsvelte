@@ -1,6 +1,7 @@
 <script>
   import { onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
+  import Logo from './Logo.svelte';
 
   export let segment;
   export let page;
@@ -157,11 +158,11 @@
   }
 
   .home {
-    height: 3rem;
-    font-size: 1.2em;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     font-family: var(--font);
+    position: relative;
+    right: 1em;
   }
 
   ul :global(li).active :global(a) {
@@ -230,7 +231,9 @@
 
 <header class:visible={visible || open}>
   <nav>
-    <a rel="prefetch" href="." class="home">{title}</a>
+    <a rel="prefetch" href="." class="home">
+      <Logo />
+    </a>
 
     {#if open}
       <div
