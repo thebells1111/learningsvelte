@@ -24,12 +24,6 @@
         };
         imgs.push(img);
       }
-      // var img = new Image();
-      // img.src = '../images/chalkboard-black.png';
-      // img.onload = function () {
-      //   ctx.drawImage(img, 0, 0);
-      //   console.log(img);
-      // };
     }
 
     var imagesAllLoaded = function () {
@@ -83,6 +77,6 @@
 </style>
 
 <div>
-  <canvas id="canvas" />
+  <canvas id="canvas" width="260" height="60" />
   <p href="." class="fredericka">Learning Svelte</p>
 </div>

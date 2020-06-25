@@ -69,24 +69,6 @@ We can change `bind:this` from `sound` to `pad.audioElement`. We'll also change 
   />
 ```
 
-Next, add a `p` tag under the `button`, and set it's inner text to be `pad.displayText`. This will show us the name of the sound the button plays.
-
-```html
-  <button
-    id={pad.displayText}
-    class="drum-pad"
-    on:click={playSound}
-  >
-    <audio
-      id={pad.id}
-      class="clip"
-      bind:this={pad.audioElement}      
-      src={pad.soundUrl}
-    />
-    {pad.id}
-  </button>
-  <p>{pad.displayText}</p>
-```
 
 And to set us up for future styling, let's wrap all of this up in a `div`. 
 
@@ -161,7 +143,6 @@ Our final code should look like this, and we are setup to turn this into a stand
     />
     {pad.id}
   </button>
-  <p>{pad.displayText}</p>
 </div>
 ```
 

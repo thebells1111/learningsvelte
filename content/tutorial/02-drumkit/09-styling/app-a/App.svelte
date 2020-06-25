@@ -64,9 +64,8 @@
     const sound = pad.audioElement;
     sound.currentTime = 0;
     sound.play();
-    displayText = pad.displayText;
-    setTimeout(() => (displayText = ''), sound.duration * 1000);
-    document.getElementById('display').innerText = displayText;
+    document.getElementById('display').innerText = pad.displayText;
+
     setTimeout(
       () => (document.getElementById('display').innerText = ''),
       sound.duration * 1000

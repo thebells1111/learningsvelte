@@ -13,5 +13,4 @@
     />
     {pad.id}
   </button>
-  <p>{pad.displayText}</p>
 </div>
