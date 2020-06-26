@@ -8,9 +8,8 @@
   button {
     width: 100%;
     height: 100%;
-    margin: 0;
-    background-color: transparent;
-    border: 2px solid black;
+    border: solid black 2px;
+    background-color: white;
     border-radius: 0;
     font-weight: 700;
   }

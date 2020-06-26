@@ -55,7 +55,7 @@
 </script>
 
 <style>
-  p {
+  /* p {
     color: #f4f4f0;
     font-family: var(--font-title), cursive;
     font-size: 1.4em;
@@ -64,19 +64,18 @@
     padding: 0;
     top: 10px;
     left: 42px;
+  } */
+
+  canvas {
+    /* position: absolute; */
   }
 
   canvas {
-    position: absolute;
-  }
-
-  div {
-    width: 260px;
-    height: 60px;
+    border: solid black 1px;
   }
 </style>
 
 <div>
   <canvas id="canvas" width="260" height="60" />
-  <p href=".">Learning Svelte</p>
+  <p href="." class="fredericka">Learning Svelte</p>
 </div>

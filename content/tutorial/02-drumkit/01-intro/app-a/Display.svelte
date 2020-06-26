@@ -4,17 +4,15 @@
 
 <style>
   p {
-    padding: 0;
-    margin: 0;
     width: 320px;
     height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    border: 3px solid black;
+    border: 2px solid black;
+    margin: 0;
     border-bottom: none;
     box-sizing: border-box;
+    display: grid;
+    place-items: center center;
+    font-weight: 700;
   }
 </style>
 
