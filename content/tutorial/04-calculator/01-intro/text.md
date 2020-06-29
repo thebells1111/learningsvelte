@@ -2,7 +2,8 @@
 title: Calculator
 ---
 
-## We are going to be building this calculator. It is part of the freeCodeCamp challenges.
+## We are going to be building this calculator. 
+### It is part of the freeCodeCamp challenges.
 
 **Here is the list the things we'll accomplish.**
 
