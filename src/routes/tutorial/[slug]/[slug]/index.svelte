@@ -44,9 +44,6 @@
   let width = process.browser ? window.innerWidth : 1000;
   let offset = 0;
 
-  // TODO is there a non-hacky way to trigger scroll when chapter changes?
-  $: if (scrollable) chapter, scrollable.scrollTo(0, 0);
-
   $: selected = lookup.get(slug);
 
   const clone = (file) => ({
@@ -56,6 +53,10 @@
   });
 
   $: if (repl) {
+    if (scrollable) {
+      scrollable.scrollTop = 0;
+      console.log(scrollable);
+    }
     repl.set({
       components: chapter.app_a.map(clone),
     });
@@ -245,8 +246,8 @@
         <TableOfContents {TOC} {slug} {title} />
       </div>
 
-      <div class="chapter-markup" bind:this={scrollable}>
-        <div>
+      <div class="chapter-markup">
+        <div bind:this={scrollable}>
           {@html chapter.html}
         </div>
 
