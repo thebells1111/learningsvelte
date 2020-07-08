@@ -156,7 +156,6 @@
     type="text/css"
     media="all"
   />
-
 </svelte:head>
 
 <div class="container">
