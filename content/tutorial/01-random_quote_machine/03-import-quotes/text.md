@@ -1,5 +1,6 @@
 ---
 title: Import and Display Quotes
+foldLine: 6
 ---
 
 For this particular app, we're going to have the quotes as a separate file. It is possible to get quotes from an API and display them, but for something this small, I prefer to just have the quotes readily available and not require a `fetch` call to get the data. 

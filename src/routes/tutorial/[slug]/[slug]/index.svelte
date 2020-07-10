@@ -32,6 +32,7 @@
   $: metadata = chapter.metadata;
   $: title = metadata.title;
   $: selectedComponent = metadata.component;
+  $: foldLine = Number(metadata.foldLine);
 
   let TOC = tutorials[tutorial.slug];
 
@@ -55,10 +56,10 @@
   $: if (repl) {
     if (scrollable) {
       scrollable.scrollTop = 0;
-      console.log(scrollable);
     }
     repl.set({
       components: chapter.app_a.map(clone),
+      foldLine: foldLine,
     });
   }
 
@@ -287,6 +288,7 @@
         orientation={'columns'}
         fixed={mobile}
         relaxed
+        {foldLine}
       />
     </div>
   </div>

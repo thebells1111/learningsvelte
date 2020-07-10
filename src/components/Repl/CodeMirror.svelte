@@ -1,11 +1,11 @@
 <script context="module">
-  import { is_browser } from "./env.js";
+  import { is_browser } from './env.js';
 
   let codemirror_promise;
   let _CodeMirror;
 
   if (is_browser) {
-    codemirror_promise = import("./codemirror.js");
+    codemirror_promise = import('./codemirror.js');
 
     codemirror_promise.then((mod) => {
       _CodeMirror = mod.default;
@@ -14,10 +14,12 @@
 </script>
 
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
-  import Message from "./Message.svelte";
+  import { onMount, createEventDispatcher, getContext } from 'svelte';
+  import Message from './Message.svelte';
 
   const dispatch = createEventDispatcher();
+
+  const { foldLine } = getContext('REPL');
 
   export let readonly = false;
   export let errorLoc = null;
@@ -27,7 +29,7 @@
 
   let w;
   let h;
-  let code = "";
+  let code = '';
   let mode;
 
   // We have to expose set and update methods, rather
@@ -75,21 +77,27 @@
     if (editor) editor.clearHistory();
   }
 
+  export function foldCode(line) {
+    if (editor && Number(line)) {
+      editor.foldCode(line - 1);
+    }
+  }
+
   const modes = {
     js: {
-      name: "javascript",
+      name: 'javascript',
       json: false,
     },
     json: {
-      name: "javascript",
+      name: 'javascript',
       json: true,
     },
     svelte: {
-      name: "handlebars",
-      base: "text/html",
+      name: 'handlebars',
+      base: 'text/html',
     },
     md: {
-      name: "markdown",
+      name: 'markdown',
     },
   };
 
@@ -116,7 +124,7 @@
         { line, ch },
         { line, ch: ch + 1 },
         {
-          className: "error-loc",
+          className: 'error-loc',
         }
       );
 
@@ -129,11 +137,11 @@
   let previous_error_line;
   $: if (editor) {
     if (previous_error_line != null) {
-      editor.removeLineClass(previous_error_line, "wrap", "error-line");
+      editor.removeLineClass(previous_error_line, 'wrap', 'error-line');
     }
 
     if (error_line && error_line !== previous_error_line) {
-      editor.addLineClass(error_line, "wrap", "error-line");
+      editor.addLineClass(error_line, 'wrap', 'error-line');
       previous_error_line = error_line;
     }
   }
@@ -146,8 +154,11 @@
       } else {
         CodeMirror = _CodeMirror;
       }
-      await createEditor(mode || "svelte");
-      if (editor) editor.setValue(code || "");
+      await createEditor(mode || 'svelte');
+      if (editor) editor.setValue(code || '');
+      if (Number(foldLine)) {
+        editor.foldCode(foldLine - 1);
+      }
     })();
 
     return () => {
@@ -169,7 +180,7 @@
       indentWithTabs: true,
       indentUnit: 2,
       tabSize: 2,
-      value: "",
+      value: '',
       mode: modes[mode] || {
         name: mode,
       },
@@ -177,24 +188,24 @@
       autoCloseBrackets: true,
       autoCloseTags: true,
       extraKeys: {
-        Enter: "newlineAndIndentContinueMarkdownList",
-        "Ctrl-/": "toggleComment",
-        "Cmd-/": "toggleComment",
-        "Ctrl-Q": function (cm) {
+        Enter: 'newlineAndIndentContinueMarkdownList',
+        'Ctrl-/': 'toggleComment',
+        'Cmd-/': 'toggleComment',
+        'Ctrl-Q': function (cm) {
           cm.foldCode(cm.getCursor());
         },
-        "Cmd-Q": function (cm) {
+        'Cmd-Q': function (cm) {
           cm.foldCode(cm.getCursor());
         },
       },
       foldGutter: true,
-      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-      scrollbarStyle: "simple"
+      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+      scrollbarStyle: 'simple',
     };
 
     if (!tab) {
-      opts.extraKeys["Tab"] = tab;
-      opts.extraKeys["Shift-Tab"] = tab;
+      opts.extraKeys['Tab'] = tab;
+      opts.extraKeys['Shift-Tab'] = tab;
     }
 
     // Creating a text editor is a lot of work, so we yield
@@ -205,10 +216,10 @@
 
     editor = CodeMirror.fromTextArea(refs.editor, opts);
 
-    editor.on("change", (instance) => {
+    editor.on('change', (instance) => {
       if (!updating_externally) {
         const value = instance.getValue();
-        dispatch("change", { value });
+        dispatch('change', { value });
       }
     });
 
@@ -294,22 +305,17 @@
 <div
   class="codemirror-container"
   class:flex
-  bind:offsetWidth="{w}"
-  bind:offsetHeight="{h}"
+  bind:offsetWidth={w}
+  bind:offsetHeight={h}
 >
   <!-- svelte-ignore a11y-positive-tabindex -->
-  <textarea
-    tabindex="2"
-    bind:this="{refs.editor}"
-    readonly
-    value="{code}"
-  ></textarea>
+  <textarea tabindex="2" bind:this={refs.editor} readonly value={code} />
 
   {#if !CodeMirror}
-  <pre style="position: absolute; left: 0; top: 0;">{code}</pre>
+    <pre style="position: absolute; left: 0; top: 0;">{code}</pre>
 
-  <div style="position: absolute; width: 100%; bottom: 0;">
-    <Message kind="info">loading editor...</Message>
-  </div>
+    <div style="position: absolute; width: 100%; bottom: 0;">
+      <Message kind="info">loading editor...</Message>
+    </div>
   {/if}
 </div>

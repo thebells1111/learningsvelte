@@ -19,6 +19,7 @@
   export let injectedJS = '';
   export let injectedCSS = '';
   export let selectedComponent;
+  export let foldLine;
 
   const historyMap = new Map();
 
@@ -54,6 +55,9 @@
 
     historyMap.clear();
     module_editor.clearHistory();
+    if (Number(data.foldLine)) {
+      module_editor.foldCode(data.foldLine);
+    }
   }
 
   export function update(data) {
@@ -123,6 +127,7 @@
     selected,
     bundle,
     compile_options,
+    foldLine,
 
     rebundle,
 
