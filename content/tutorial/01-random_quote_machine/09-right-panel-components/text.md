@@ -1,62 +1,72 @@
 ---
 title: Style LeftPanel.svelte
 ---
+https://dev.to/jfbrennan/custom-html-tags-4788
 
-Now we can start styling some more. In `LeftPanel.svelte`, below the `script` tag, we'll add a `style` tag. Inside of the style tag, we'll add the following CSS.
+For this component, we're going to use [custom elements](https://www.html5rocks.com/en/tutorials/webcomponents/customelements/). [Jordan Brennan](https://dev.to/jfbrennan/custom-html-tags-4788) has an article that explains custom elements as well. I like using them, and they feel natural in Svelte where we have components anyway. 
+
+We could break each of our custom elements into a separate component, which in many case makes sense. However, for this tutorial, we would need four separate components for the `RightPanel`, and with the REPL setup the way it is, it can get a little cumbersome. If I was doing this in VSCode, I would definitely consider putting everything in a folder titled `RightPanel` and creating four separate components. 
+
+Because this is suppose to look like a postcard, we'll have a stamp, a salutation, a valediction, and footer type thing for the control buttons.
+
+So, inside of `RightPanel.svelte`, we're going to change the markup to look like this.
+
+```html
+<pc-panel>
+  <pc-stamp></pc-stamp>
+  <pc-salutation></pc-salutation>
+  <pc-valediction>
+    <p id="author">{currentAuthor}</p>
+  </pc-valediction>
+  <pc-control-buttons>
+    <button id="new-quote" on:click={newQuote}>New Quote</button>
+    <a id="tweet-quote" href={twitterUrl}>Tweet Quote</a>
+  </pc-control-buttons>
+</pc-panel>
+```
+
+Instead of using a bunch of `div`s with classes, we can just create our own elements, and our html becomes a little bit more clear of what is going on. I'm prefaced each of my elements with `pc`, which is short for postcard, because a lot of what I've read recommends doing that in case one of our custom elements becomes a standard element, the code may break in a future browser, so the prefix is to help mitigate that. 
+
+The right panel still looks the same, but we're now using custom elements. 
+
+First, let's style the panel some. This is all pretty standard CSS.
 
 ```html
 <style>
-  div {
+  pc-panel {
     box-sizing: border-box;
     width: 50%;
-    border-right: 1px solid black;
-  }
-
-  p {
-    margin: 0;
-    font-size: 1.2em;
-    line-height: 1.2em;
-    padding: 0.5rem 1rem 0 1rem;
-    transform: rotate(-3deg);
-    font-family: 'La Belle Aurore';
+    height: 100%;
+    padding: 0 0 0 1em;
+    font-family: 'Great Vibes';
   }
 </style>
 ```
 
-This is pretty basic css stuff. The width of the `div` is set to `50%` so now the postcard is split in half. A `border-right` is added to visually split the two panels, and make the box look more like a postcard. The `margins` of the `p` are reset to `0`, and we increase the `font-size` and `line-height` to make it a little more readable. We rotate the `p` a little to make it look a little more organic, and add the `font-family`, which uses the Google Font we put in out `svelte:head` in one of the previous steps. Now the left pane has a hand written feel to it. If you click New Quote a few times though, you'll notice a new problem though. If the quote is particularly long, it overflows beyond the postcard. That's not cool. We don't want to have scrollbars in our postcard, so we'll have to decrease the font size if the quote is too long. We'll add a new class to the CSS, which displays a smaller text.
+Each of custom elements is an `inline` element, so for each one, we'll make it a `block` element, as well as defining a `height` for it.
 
 ```html
 <style>
-  div {
+  pc-panel {
     box-sizing: border-box;
     width: 50%;
-    border-right: 1px solid black;
+    height: 100%;
+    padding: 0 0 0 1em;
+    font-family: 'Great Vibes';
   }
 
-  p {
-    margin: 0;
-    font-size: 1.2em;
-    line-height: 1.2em;
-    padding: 0.5rem 1rem 0 1rem;
-    transform: rotate(-3deg);
-    font-family: 'La Belle Aurore';
+  pc-stamp,
+  pc-salutation {
+    height: 25%;
+    display: block;
+  }
+  pc-valediction {
+    height: 40%;
+    display: block;
   }
 
-  .small-text {
-    font-size: 1em;
+  pc-control-buttons {
+    display: block;
   }
 </style>
 ```
-
-Now we just need a way for our app to apply the class if the quote is too long. Svelte provides a solution. It's called the `class directive` and it's a way to apply a class to a element if a condition is true. `class:active="{current === 'foo'}"` In this case, the class of `active` will be applied to the element if `current === 'foo'` otherwise, the class is not on the element. We want the `small-text` class to be applied to our `p` if the `currentText.length` is too long. Messing around with the different long quotes, I found `currentText.length > 250` accomplished this.
-
-
-```html
-<div>
-  <p id="text" class:small-text={currentText.length > 250}>
-    {currentText}
-  </p>
-</div>
-```
-
-Now, when we click through the quotes, there's no overflow, and longer quotes have a smaller font. The left panel is working exactly as we'd like it to.
