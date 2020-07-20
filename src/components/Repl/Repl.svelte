@@ -21,6 +21,15 @@
   export let selectedComponent;
   export let foldLine;
 
+  $: try {
+    if (foldLine && !Array.isArray(foldLine)) {
+      throw 'Warning: foldLine should be an array';
+    }
+  } catch (e) {
+    console.log(e);
+    foldLine = [];
+  }
+
   const historyMap = new Map();
 
   export function toJSON() {
@@ -55,8 +64,12 @@
 
     historyMap.clear();
     module_editor.clearHistory();
-    if (Number(data.foldLine)) {
-      module_editor.foldCode(data.foldLine);
+    if (Array.isArray(data.foldLine)) {
+      data.foldLine.forEach((line) => {
+        if (Number(line)) {
+          module_editor.foldCode(line);
+        }
+      });
     }
   }
 
@@ -128,7 +141,6 @@
     bundle,
     compile_options,
     foldLine,
-
     rebundle,
 
     navigate: (item) => {

@@ -29,10 +29,15 @@
   export let slug;
   export let chapter;
   export let tutorial;
+  let foldLine;
   $: metadata = chapter.metadata;
   $: title = metadata.title;
   $: selectedComponent = metadata.component;
-  $: foldLine = Number(metadata.foldLine);
+  $: try {
+    foldLine = JSON.parse(metadata.foldLine);
+  } catch (e) {
+    foldLine = undefined;
+  }
 
   let TOC = tutorials[tutorial.slug];
 

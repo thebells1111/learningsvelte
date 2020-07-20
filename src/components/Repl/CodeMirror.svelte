@@ -156,8 +156,23 @@
       }
       await createEditor(mode || 'svelte');
       if (editor) editor.setValue(code || '');
-      if (Number(foldLine)) {
-        editor.foldCode(foldLine - 1);
+      if (Array.isArray(foldLine)) {
+        foldLine.forEach((line) => {
+          if (Number(line)) {
+            editor.foldCode(line - 1);
+          }
+          // if (typeof line === 'string') {
+          //   alert(line);
+          //   let cursor = editor.getSearchCursor(line);
+          //   cursor.findNext();
+          //   console.log(new Date());
+          //   console.log(cursor);
+          //   if (cursor.pos.from.line) {
+          //     editor.foldCode(cursor.pos.from.line);
+          //     alert(cursor.pos.from.line);
+          //   }
+          // }
+        });
       }
     })();
 

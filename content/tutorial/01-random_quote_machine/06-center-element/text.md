@@ -1,5 +1,6 @@
 ---
 title: Center #quote-box and test
+foldLine: ["script", 19]
 ---
 **User Story #11:** The #quote-box wrapper element should be horizontally centered. Please run tests with browser's zoom level at 100% and page maximized.
 
