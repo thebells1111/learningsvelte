@@ -261,7 +261,7 @@
         <div class="controls">
           <div>
             {#if chapter.prev}
-              <a class="prev" href="tutorial/{tutorial.slug}/{chapter.prev}">
+              <a class="prev" href="projects/{tutorial.slug}/{chapter.prev}">
                 Previous
               </a>
             {/if}
@@ -275,7 +275,7 @@
           </div>
           <div>
             {#if chapter.next}
-              <a class="next" href="tutorial/{tutorial.slug}/{chapter.next}">
+              <a class="next" href="projects/{tutorial.slug}/{chapter.next}">
                 Next
               </a>
             {/if}
