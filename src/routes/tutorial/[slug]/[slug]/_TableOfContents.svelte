@@ -66,7 +66,6 @@
     </span>
     <select value={slug} on:change={navigate}>
       {#each TOC.chapters as chapter, i}
-        }
         <option value={chapter.slug}>{i + 1}. {chapter.title}</option>
       {/each}
     </select>

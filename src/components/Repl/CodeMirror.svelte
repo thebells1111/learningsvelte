@@ -18,7 +18,6 @@
   import Message from './Message.svelte';
 
   const dispatch = createEventDispatcher();
-
   const { foldLine } = getContext('REPL');
 
   export let readonly = false;
@@ -26,6 +25,7 @@
   export let flex = false;
   export let lineNumbers = true;
   export let tab = true;
+  export let isInitialLoad;
 
   let w;
   let h;
@@ -80,6 +80,16 @@
   export function foldCode(line) {
     if (editor && Number(line)) {
       editor.foldCode(line - 1);
+    }
+  }
+
+  export function foldString(line) {
+    if (editor) {
+      let cursor = editor.getSearchCursor(line);
+      cursor.findNext();
+      if (!isNaN(cursor.pos.from.line)) {
+        editor.foldCode(cursor.pos.from.line);
+      }
     }
   }
 
@@ -155,25 +165,26 @@
         CodeMirror = _CodeMirror;
       }
       await createEditor(mode || 'svelte');
-      if (editor) editor.setValue(code || '');
-      if (Array.isArray(foldLine)) {
-        foldLine.forEach((line) => {
-          if (Number(line)) {
-            editor.foldCode(line - 1);
-          }
-          // if (typeof line === 'string') {
-          //   alert(line);
-          //   let cursor = editor.getSearchCursor(line);
-          //   cursor.findNext();
-          //   console.log(new Date());
-          //   console.log(cursor);
-          //   if (cursor.pos.from.line) {
-          //     editor.foldCode(cursor.pos.from.line);
-          //     alert(cursor.pos.from.line);
-          //   }
-          // }
-        });
+      if (editor) {
+        editor.setValue(code || '');
+
+        if (Array.isArray(foldLine) && isInitialLoad) {
+          foldLine.forEach((line) => {
+            if (Number(line)) {
+              editor.foldCode(line - 1);
+            }
+            if (typeof line === 'string') {
+              let cursor = editor.getSearchCursor(line);
+              cursor.findNext();
+              if (!isNaN(cursor.pos.from.line)) {
+                editor.foldCode(cursor.pos.from.line);
+              }
+            }
+          });
+        }
       }
+
+      isInitialLoad = false;
     })();
 
     return () => {

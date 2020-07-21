@@ -64,10 +64,20 @@
 
     historyMap.clear();
     module_editor.clearHistory();
+    // if (Array.isArray(data.foldLine)) {
+    //   data.foldLine.forEach((line) => {
+    //     if (Number(line)) {
+    //       module_editor.foldCode(line);
+    //     }
+    //   });
+    // }
     if (Array.isArray(data.foldLine)) {
-      data.foldLine.forEach((line) => {
+      foldLine.forEach((line) => {
         if (Number(line)) {
           module_editor.foldCode(line);
+        }
+        if (typeof line === 'string') {
+          module_editor.foldString(line);
         }
       });
     }
@@ -118,6 +128,17 @@
 
   let module_editor;
   let output;
+  // $: if (module_editor && module_editor.foldCode) {
+  //   console.log(foldLine);
+  //   if (Array.isArray(foldLine)) {
+  //     foldLine.forEach((line) => {
+  //       if (Number(line)) {
+  //         console.log(module_editor.foldCode);
+  //         module_editor.foldCode(line);
+  //       }
+  //     });
+  //   }
+  // }
 
   let current_token;
   async function rebundle() {

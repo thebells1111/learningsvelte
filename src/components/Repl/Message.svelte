@@ -7,7 +7,7 @@
   export let kind;
   export let details = null;
   export let filename = null;
-  export let truncate;
+  export let truncate = false;
 
   function message(details) {
     let str = details.message || '[missing message]';

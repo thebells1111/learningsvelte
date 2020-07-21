@@ -289,7 +289,6 @@
         workersUrl="workers"
         {selectedComponent}
         {svelteUrl}
-        {rollupUrl}
         orientation={'columns'}
         fixed={mobile}
         relaxed

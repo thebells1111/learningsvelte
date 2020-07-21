@@ -61,7 +61,7 @@ Next, we'll style the `#quote-box` some, just to make it stand out some more.
 
 We set the `box-sizing` to `border-box` in order to make sure everything stays inside of our defined `width` and `height`. I find `border-box` to be a little more intuitive than the default of `content-box`.
 
-Next, we set the `width` and `height`. Eventually, the styling will make this look like a postcard, so we're just setting hard values instead of more responsive values. We set the `background-color` to `white` to set it a part from the `.container`, and give it some padding to move the text away from the edges. Finall, we create a little `box-shadow` to make it look like it's hovering slightly over the 
+Next, we set the `width` and `height`. Eventually, the styling will make this look like a postcard, so we're just setting hard values instead of more responsive values. We set the `background-color` to `white` to set it a part from the `.container`, and give it some padding to move the text away from the edges. Finally, we create a little `box-shadow` to make it look like it's hovering slightly over the 
 `.container`.
 
 Everything actually looks pretty good. There's some more styling we can do to polish it up, but that's just lipstick and rouge. Let's test the functionality of everything to see where we stand in relation to our User Stories.
