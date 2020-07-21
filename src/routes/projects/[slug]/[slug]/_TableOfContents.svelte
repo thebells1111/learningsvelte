@@ -7,7 +7,7 @@
   export let title;
 
   function navigate(e) {
-    goto(`tutorial/${TOC.tutorial.slug}/${e.target.value}`);
+    goto(`projects/${TOC.tutorial.slug}/${e.target.value}`);
   }
 </script>
 

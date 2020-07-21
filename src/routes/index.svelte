@@ -41,7 +41,7 @@
 
 <div>
   <img
-    alt="Doug the Dog"
+    alt="Doug the Dog, the official Learning Svelte mascot"
     src="https://res.cloudinary.com/learningsvelte/image/upload/v1593136802/Doug_the_Doug_Color.png"
   />
   <p>

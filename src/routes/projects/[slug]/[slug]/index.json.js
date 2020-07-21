@@ -1,13 +1,13 @@
-import * as fs from "fs";
-import * as path from "path";
-import marked from "marked";
-import send from "@polka/send";
+import * as fs from 'fs';
+import * as path from 'path';
+import marked from 'marked';
+import send from '@polka/send';
 import {
   extract_frontmatter,
   extract_metadata,
   link_renderer,
-} from "@sveltejs/site-kit/utils/markdown";
-import { highlight } from "../../../../utils/highlight";
+} from '@sveltejs/site-kit/utils/markdown';
+import { highlight } from '../../../../utils/highlight';
 
 const cache = new Map();
 
@@ -16,11 +16,11 @@ function get_directories() {
 
   const directories = {};
 
-  fs.readdirSync("content/tutorial")
+  fs.readdirSync('content/projects')
     .filter((dir) => /^\d+/.test(dir))
     .forEach((dir) => {
       try {
-        const slug = dir.replace(/^\d+-/, "");
+        const slug = dir.replace(/^\d+-/, '');
         if (slugs.has(slug)) throw new Error(`Duplicate slug: ${slug}`);
         slugs.add(slug);
         directories[slug] = dir;
@@ -35,11 +35,11 @@ function get_directories() {
 function get_chapters(directory) {
   const slugs = new Set();
   const files = new Set();
-  fs.readdirSync(`content/tutorial/${directory}`)
+  fs.readdirSync(`content/projects/${directory}`)
     .filter((dir) => /^\d+/.test(dir))
     .forEach((chapter, index) => {
       try {
-        const slug = chapter.replace(/^\d+-/, "");
+        const slug = chapter.replace(/^\d+-/, '');
         if (slugs.has(slug)) throw new Error(`Duplicate slug: ${slug}`);
         slugs.add(slug);
         files.add(chapter);
@@ -64,9 +64,9 @@ function get_tutorial(tutorial, slug) {
       ? chapters.slugs[chapterIndex + 1]
       : undefined;
 
-  const dir = `content/tutorial/${tutorial}/${chapter}`;
+  const dir = `content/projects/${tutorial}/${chapter}`;
 
-  const markdown = fs.readFileSync(`${dir}/text.md`, "utf-8");
+  const markdown = fs.readFileSync(`${dir}/text.md`, 'utf-8');
   const app_a = fs.readdirSync(`${dir}/app-a`);
   const app_b = fs.existsSync(`${dir}/app-b`) && fs.readdirSync(`${dir}/app-b`);
 
@@ -77,21 +77,21 @@ function get_tutorial(tutorial, slug) {
   renderer.link = link_renderer;
 
   renderer.code = (source, lang) => {
-    source = source.replace(/^ +/gm, (match) => match.split("    ").join("\t"));
+    source = source.replace(/^ +/gm, (match) => match.split('    ').join('\t'));
 
-    const lines = source.split("\n");
+    const lines = source.split('\n');
 
     const meta = extract_metadata(lines[0], lang);
 
-    let prefix = "";
-    let className = "code-block";
+    let prefix = '';
+    let className = 'code-block';
 
     if (meta) {
-      source = lines.slice(1).join("\n");
-      const filename = meta.filename || (lang === "html" && "App.svelte");
+      source = lines.slice(1).join('\n');
+      const filename = meta.filename || (lang === 'html' && 'App.svelte');
       if (filename) {
         prefix = `<span class='filename'>${prefix} ${filename}</span>`;
-        className += " named";
+        className += ' named';
       }
     }
 
@@ -111,14 +111,14 @@ function get_tutorial(tutorial, slug) {
     return {
       name,
       type,
-      source: fs.readFileSync(`${dir}/${stage}/${file}`, "utf-8"),
+      source: fs.readFileSync(`${dir}/${stage}/${file}`, 'utf-8'),
     };
   }
 
   return {
     html,
-    app_a: app_a.map((file) => get_file("app-a", file)),
-    app_b: app_b && app_b.map((file) => get_file("app-b", file)),
+    app_a: app_a.map((file) => get_file('app-a', file)),
+    app_b: app_b && app_b.map((file) => get_file('app-b', file)),
     prev: prevChapter,
     next: nextChapter,
     metadata: metadata,
@@ -127,17 +127,17 @@ function get_tutorial(tutorial, slug) {
 
 export function get(req, res) {
   const slug = req.query.slug;
-  const tutorial = req.path.split("/")[2];
+  const tutorial = req.path.split('/')[2];
 
-  let directories = cache.get("storedDirectories");
+  let directories = cache.get('storedDirectories');
   let tut = cache.get(tutorial);
 
-  if (!directories || process.env.NODE_ENV !== "production") {
+  if (!directories || process.env.NODE_ENV !== 'production') {
     directories = get_directories();
-    cache.set("storedDirectories", directories);
+    cache.set('storedDirectories', directories);
   }
 
-  if (!tut || process.env.NODE_ENV !== "production") {
+  if (!tut || process.env.NODE_ENV !== 'production') {
     tut = get_tutorial(directories[tutorial], slug);
     cache.set(tutorial, tut);
   }
@@ -148,6 +148,6 @@ export function get(req, res) {
     };
     send(res, 200, data);
   } else {
-    send(res, 404, { message: "not found" });
+    send(res, 404, { message: 'not found' });
   }
 }
