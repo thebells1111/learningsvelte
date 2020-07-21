@@ -1,6 +1,5 @@
 ---
 title: Create Next Quote Function
-foldLine: [1]
 ---
 **User Story #8:** When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element.
 

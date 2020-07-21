@@ -338,7 +338,7 @@
   <textarea tabindex="2" bind:this={refs.editor} readonly value={code} />
 
   {#if !CodeMirror}
-    <pre style="position: absolute; left: 0; top: 0;">{code}</pre>
+    <pre style="position: absolute; left: 0; top: 0;">loading code...</pre>
 
     <div style="position: absolute; width: 100%; bottom: 0;">
       <Message kind="info">loading editor...</Message>

@@ -34,7 +34,7 @@
   $: title = metadata.title;
   $: selectedComponent = metadata.component;
   $: try {
-    foldLine = JSON.parse(metadata.foldLine);
+    foldLine = JSON.parse(metadata.fold);
   } catch (e) {
     foldLine = undefined;
   }
@@ -65,6 +65,7 @@
     repl.set({
       components: chapter.app_a.map(clone),
       foldLine: foldLine,
+      selectedComponent: selectedComponent,
     });
   }
 
@@ -287,7 +288,6 @@
       <Repl
         bind:this={repl}
         workersUrl="workers"
-        {selectedComponent}
         {svelteUrl}
         orientation={'columns'}
         fixed={mobile}

@@ -1,7 +1,8 @@
 ---
-title: Style LeftPanel.svelte
+title: Style RightPanel.svelte
+component: RightPanel.svelte
+fold: ["script"]
 ---
-https://dev.to/jfbrennan/custom-html-tags-4788
 
 For this component, we're going to use [custom elements](https://www.html5rocks.com/en/tutorials/webcomponents/customelements/). [Jordan Brennan](https://dev.to/jfbrennan/custom-html-tags-4788) has an article that explains custom elements as well. I like using them, and they feel natural in Svelte where we have components anyway. 
 
@@ -25,9 +26,9 @@ So, inside of `RightPanel.svelte`, we're going to change the markup to look like
 </pc-panel>
 ```
 
-Instead of using a bunch of `div`s with classes, we can just create our own elements, and our html becomes a little bit more clear of what is going on. I'm prefaced each of my elements with `pc`, which is short for postcard, because a lot of what I've read recommends doing that in case one of our custom elements becomes a standard element, the code may break in a future browser, so the prefix is to help mitigate that. 
+Instead of using a bunch of `div` tags with classes, we can just create our own elements, and our html becomes a little bit more clear of what is going on. I've prefaced each of my elements with `pc`, which is short for postcard, because a lot of what I've read recommends doing that. If one of our custom elements becomes a standard element, the code may break in a future browser, so the prefix is to help mitigate that. 
 
-The right panel still looks the same, but we're now using custom elements. 
+The right panel still looks the same, but now we're using custom elements. 
 
 First, let's style the panel some. This is all pretty standard CSS.
 

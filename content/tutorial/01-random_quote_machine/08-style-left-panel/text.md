@@ -1,5 +1,6 @@
 ---
 title: Style LeftPanel.svelte
+component: LeftPanel.svelte
 ---
 
 Now we can start styling some more. In `LeftPanel.svelte`, below the `script` tag, we'll add a `style` tag. Inside of the style tag, we'll add the following CSS.
@@ -23,7 +24,7 @@ Now we can start styling some more. In `LeftPanel.svelte`, below the `script` ta
 </style>
 ```
 
-This is pretty basic css stuff. The width of the `div` is set to `50%` so now the postcard is split in half. A `border-right` is added to visually split the two panels, and make the box look more like a postcard. The `margins` of the `p` are reset to `0`, and we increase the `font-size` and `line-height` to make it a little more readable. We rotate the `p` a little to make it look a little more organic, and add the `font-family`, which uses the Google Font we put in out `svelte:head` in one of the previous steps. Now the left pane has a hand written feel to it. If you click New Quote a few times though, you'll notice a new problem though. If the quote is particularly long, it overflows beyond the postcard. That's not cool. We don't want to have scrollbars in our postcard, so we'll have to decrease the font size if the quote is too long. We'll add a new class to the CSS, which displays a smaller text.
+This is pretty basic CSS stuff. The width of the `div` is set to `50%` so now the postcard is split in half. A `border-right` is added to visually split the two panels, and make the box look more like a postcard. The `margins` of the `p` are reset to `0`, and we increase the `font-size` and `line-height` to make it a little more readable. We rotate the `p` a little to make it look a little more organic, and add the `font-family`, which uses the Google Font we put in out `svelte:head` in one of the previous steps. Now the left pane has a hand written feel to it. If you click New Quote a few times though, you'll notice a new problem though. If the quote is particularly long, it overflows beyond the postcard. That's not cool. We don't want to have scrollbars in our postcard, so we'll have to decrease the font size if the quote is too long. We'll add a new class to the CSS, which displays a smaller text.
 
 ```html
 <style>

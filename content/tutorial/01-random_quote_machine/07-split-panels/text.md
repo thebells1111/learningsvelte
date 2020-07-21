@@ -1,6 +1,5 @@
 ---
 title: Break into components
-foldLine: ["script", "style"]
 ---
 
 Since everything is passing the test, let's go remove the the fCC Test Suite Link, and add in some links to some Google Fonts. We're going to be using two different fonts. Since this is suppose to be a postcard, I found some fonts that look like handwriting, and we'll use them a little later in the project.

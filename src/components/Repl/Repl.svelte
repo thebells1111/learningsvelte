@@ -18,9 +18,7 @@
   export let fixedPos = 50;
   export let injectedJS = '';
   export let injectedCSS = '';
-  export let selectedComponent;
   export let foldLine;
-
   $: try {
     if (foldLine && !Array.isArray(foldLine)) {
       throw 'Warning: foldLine should be an array';
@@ -42,9 +40,9 @@
   export async function set(data) {
     components.set(data.components);
     let selectedIndex = 0;
-    if (selectedComponent) {
-      const name = selectedComponent.split('.')[0];
-      const type = selectedComponent.split('.')[1];
+    if (data.selectedComponent) {
+      const name = data.selectedComponent.split('.')[0];
+      const type = data.selectedComponent.split('.')[1];
       data.components.forEach((v, i) => {
         if (v.name === name && v.type === type) {
           selectedIndex = i;
@@ -64,13 +62,6 @@
 
     historyMap.clear();
     module_editor.clearHistory();
-    // if (Array.isArray(data.foldLine)) {
-    //   data.foldLine.forEach((line) => {
-    //     if (Number(line)) {
-    //       module_editor.foldCode(line);
-    //     }
-    //   });
-    // }
     if (Array.isArray(data.foldLine)) {
       foldLine.forEach((line) => {
         if (Number(line)) {
@@ -128,17 +119,6 @@
 
   let module_editor;
   let output;
-  // $: if (module_editor && module_editor.foldCode) {
-  //   console.log(foldLine);
-  //   if (Array.isArray(foldLine)) {
-  //     foldLine.forEach((line) => {
-  //       if (Number(line)) {
-  //         console.log(module_editor.foldCode);
-  //         module_editor.foldCode(line);
-  //       }
-  //     });
-  //   }
-  // }
 
   let current_token;
   async function rebundle() {
