@@ -25,6 +25,8 @@ function get_tutorials() {
       tutorials[dir.replace(/^\d+-/, '')] = {
         tutorial: {
           title: meta.title,
+          img: meta.img,
+          description: meta.description,
           dir: dir,
           slug: dir.replace(/^\d+-/, ''),
         },

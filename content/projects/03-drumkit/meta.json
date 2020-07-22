@@ -1,3 +1,5 @@
 {
-  "title": "freeCodeCamp Drum Machine"
+  "title": "freeCodeCamp Drum Machine",
+  "img": "https://res.cloudinary.com/learningsvelte/image/upload/v1595449748/learningsvelte/projects/toc/drum-machine.png",
+  "description": "Once your done building this Drum Machine, you'll be rocking out like Rick Allen."
 }

@@ -1,3 +1,5 @@
 {
-  "title": "freeCodeCamp Random Quote Machine"
+  "title": "freeCodeCamp<br>Random Quote Machine",
+  "img": "https://res.cloudinary.com/learningsvelte/image/upload/v1595446969/learningsvelte/projects/toc/random_quote_machine.png",
+  "description": "Once you complete this project, you'll have built the freeCodeCamp \"Build a Random Quote Machine \" Front End Libraries Project."
 }
