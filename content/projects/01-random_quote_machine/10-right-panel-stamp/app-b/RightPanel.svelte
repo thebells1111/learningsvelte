@@ -35,10 +35,24 @@
     margin: 0;
     outline: none;
   }
+
+  pc-stamp > p {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    font-size: 0.8em;
+    float: right;
+    font-family: initial;
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
 </style>
 
 <pc-panel>
-  <pc-stamp />
+  <pc-stamp>
+    <p>Place Stamp Here</p>
+  </pc-stamp>
   <pc-salutation />
   <pc-valediction>
     <p id="author">{currentAuthor}</p>

@@ -1,5 +1,5 @@
 ---
-title: Style RightPanel.svelte
+title: Style Stamp
 component: RightPanel.svelte
 fold: ["script"]
 ---
@@ -39,6 +39,7 @@ First, let's style the panel some. This is all pretty standard CSS.
     width: 50%;
     height: 100%;
     padding: 0 0 0 1em;
+    font-family: 'Great Vibes';
   }
 </style>
 ```
@@ -52,33 +53,21 @@ Each of custom elements is an `inline` element, so for each one, we'll make it a
     width: 50%;
     height: 100%;
     padding: 0 0 0 1em;
+    font-family: 'Great Vibes';
   }
 
   pc-stamp,
-  pc-salutation,
-  pc-valediction {
+  pc-salutation {
     height: 25%;
     display: block;
   }
   pc-valediction {
     height: 40%;
+    display: block;
   }
 
   pc-control-buttons {
     display: block;
   }
 </style>
-```
-
-Finally, we'll change the style of the `New Quote` button to prevent it from overflowing the postcard. Again, it's pretty basic CSS to reset the button styles. We'll refined the button later, but for now let's add this.
-
-```css
-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  outline: none;
-}
 ```
