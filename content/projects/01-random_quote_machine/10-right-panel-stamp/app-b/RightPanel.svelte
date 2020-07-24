@@ -47,11 +47,26 @@
     place-items: center;
     text-align: center;
   }
+
+  img{
+		position:relative;
+		left:80px;
+		top: 10px;
+	}
+
+	img:first-of-type{
+		left:165px;
+		top: 0px;
+    transform: rotate(3deg);
+	}
 </style>
 
 <pc-panel>
   <pc-stamp>
     <p>Place Stamp Here</p>
+    <img alt="Stamp of Marcus Aurelius" src="https://res.cloudinary.com/learningsvelte/image/upload/c_thumb,w_60,g_face/v1595559461/learningsvelte/projects/random_quote_machine/Marcus.png"/>
+    <img alt="Stamp Cancelation Mark" src="https://res.cloudinary.com/learningsvelte/image/upload/v1595561153/learningsvelte/projects/random_quote_machine/cancel.png"/>
+
   </pc-stamp>
   <pc-salutation />
   <pc-valediction>
