@@ -4,70 +4,94 @@ component: RightPanel.svelte
 fold: ["script"]
 ---
 
-For this component, we're going to use [custom elements](https://www.html5rocks.com/en/tutorials/webcomponents/customelements/). [Jordan Brennan](https://dev.to/jfbrennan/custom-html-tags-4788) has an article that explains custom elements as well. I like using them, and they feel natural in Svelte where we have components anyway. 
+This is just more styling. We'll add some more CSS to `pc-stamp`. We're making it a flex element with a direction of `row-reverse` so we can get the stamp on the right hand side of the postcard. We're also giving it a position of `relative` so we can later use `absolute` to position the stamp.
 
-We could break each of our custom elements into a separate component, which in many case makes sense. However, for this tutorial, we would need four separate components for the `RightPanel`, and with the REPL setup the way it is, it can get a little cumbersome. If I was doing this in VSCode, I would definitely consider putting everything in a folder titled `RightPanel` and creating four separate components. 
-
-Because this is suppose to look like a postcard, we'll have a stamp, a salutation, a valediction, and footer type thing for the control buttons.
-
-So, inside of `RightPanel.svelte`, we're going to change the markup to look like this.
-
-```html
-<pc-panel>
-  <pc-stamp></pc-stamp>
-  <pc-salutation></pc-salutation>
-  <pc-valediction>
-    <p id="author">{currentAuthor}</p>
-  </pc-valediction>
-  <pc-control-buttons>
-    <button id="new-quote" on:click={newQuote}>New Quote</button>
-    <a id="tweet-quote" href={twitterUrl}>Tweet Quote</a>
-  </pc-control-buttons>
-</pc-panel>
+```css
+pc-stamp {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+}
 ```
 
-Instead of using a bunch of `div` tags with classes, we can just create our own elements, and our html becomes a little bit more clear of what is going on. I've prefaced each of my elements with `pc`, which is short for postcard, because a lot of what I've read recommends doing that. If one of our custom elements becomes a standard element, the code may break in a future browser, so the prefix is to help mitigate that. 
-
-The right panel still looks the same, but now we're using custom elements. 
-
-First, let's style the panel some. This is all pretty standard CSS.
+Inside of the markup, we'll add `p` tag with the text `Place Stamp Here`.
 
 ```html
-<style>
-  pc-panel {
-    box-sizing: border-box;
-    width: 50%;
-    height: 100%;
-    padding: 0 0 0 1em;
-    font-family: 'Great Vibes';
-  }
-</style>
+<pc-stamp>
+  <p>Place Stamp Here</p>    
+</pc-stamp>
 ```
 
-Each of custom elements is an `inline` element, so for each one, we'll make it a `block` element, as well as defining a `height` for it.
+Then we'll style the `p` to make it look more like a stamp box.
+
+```css
+pc-stamp > p {
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  border: 1px solid black;
+  font-size: 0.8em;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+```
+
+We used `display:grid` to allow us to use `place-items: center`, to make centering everything easier.
+
+Ok, this is starting to look more and more like a postcard. Next, let's add an actual stamp. We'll just add an `img` of a stamp to the markup. You can use this URL as your `src`.
+
+`https://res.cloudinary.com/learningsvelte/image/upload/c_thumb,w_60,g_face/v1595559461/learningsvelte/projects/random_quote_machine/Marcus.png`
 
 ```html
-<style>
-  pc-panel {
-    box-sizing: border-box;
-    width: 50%;
-    height: 100%;
-    padding: 0 0 0 1em;
-    font-family: 'Great Vibes';
-  }
-
-  pc-stamp,
-  pc-salutation {
-    height: 25%;
-    display: block;
-  }
-  pc-valediction {
-    height: 40%;
-    display: block;
-  }
-
-  pc-control-buttons {
-    display: block;
-  }
-</style>
+<pc-stamp>
+  <p>Place Stamp Here</p>  
+  <img
+    alt="Stamp of Marcus Aurelius"
+    src="https://res.cloudinary.com/learningsvelte/image/upload/c_thumb,w_60,g_face/v1595559461/learningsvelte/projects/random_quote_machine/Marcus.png"
+  />  
+</pc-stamp>
 ```
+
+Now that we have a stamp, we can style it to place it over the stamp box. First, we'll position it using `absolute`. We're going to bring in another `img` of a cancellation mark, so we'll also target just this `img` so we can move it around some, then we'll rotate it slightly to make it look more natural.
+
+```css
+pc-stamp > img {
+  position: absolute;
+}
+
+pc-stamp > img:nth-of-type(1) {
+  top: -5px;
+  transform: rotate(3deg);
+}
+```
+
+Next, we'll add the cancellation mark. The URL for that `img` is
+
+`https://res.cloudinary.com/learningsvelte/image/upload/v1595561153/learningsvelte/projects/random_quote_machine/cancel.png`
+
+```html
+<pc-stamp>
+  <p>Place Stamp Here</p>
+  <img
+    alt="Stamp of Marcus Aurelius"
+    src="https://res.cloudinary.com/learningsvelte/image/upload/c_thumb,w_60,g_face/v1595559461/learningsvelte/projects/random_quote_machine/Marcus.png"
+  />
+  <img
+    alt="Stamp Cancelation Mark"
+    src="https://res.cloudinary.com/learningsvelte/image/upload/v1595561153/learningsvelte/projects/random_quote_machine/cancel.png"
+  />
+</pc-stamp>
+```
+
+Now it's just a simple matter of applying some more CSS to adjust the location of the cancellation mark.
+
+```css
+pc-stamp > img:nth-of-type(2) {
+  top: 25px;
+  right: 25px;
+}
+```
+
+Awesome!!! This is really starting to look like a postcard. Let's move on to styling the salutation.

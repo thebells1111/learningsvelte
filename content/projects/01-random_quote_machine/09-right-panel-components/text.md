@@ -34,40 +34,33 @@ First, let's style the panel some. This is all pretty standard CSS.
 
 ```html
 <style>
-  pc-panel {
+   pc-panel {
     box-sizing: border-box;
     width: 50%;
     height: 100%;
     padding: 0 0 0 1em;
+    display: flex;
+    flex-direction: column;
   }
 </style>
 ```
 
-Each of custom elements is an `inline` element, so for each one, we'll make it a `block` element, as well as defining a `height` for it.
+We'll then tell each of the other custom items where to fall inside `pc-panel` using `flex`.
 
-```html
-<style>
-  pc-panel {
-    box-sizing: border-box;
-    width: 50%;
-    height: 100%;
-    padding: 0 0 0 1em;
+```css
+  pc-stamp {
+    flex: 0 1 auto
   }
 
-  pc-stamp,
-  pc-salutation,
-  pc-valediction {
-    height: 25%;
-    display: block;
+  pc-salutation {
+    flex: 0 1 30%;
   }
   pc-valediction {
-    height: 40%;
+    flex: 1 1 30%;
   }
-
   pc-control-buttons {
-    display: block;
+    flex: 0 1 auto;
   }
-</style>
 ```
 
 Finally, we'll change the style of the `New Quote` button to prevent it from overflowing the postcard. Again, it's pretty basic CSS to reset the button styles. We'll refined the button later, but for now let's add this.

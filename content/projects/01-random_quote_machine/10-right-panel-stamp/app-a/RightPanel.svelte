@@ -11,20 +11,22 @@
     width: 50%;
     height: 100%;
     padding: 0 0 0 1em;
+    display: flex;
+    flex-direction: column;
   }
 
-  pc-stamp,
-  pc-salutation,
-  pc-valediction {
-    height: 25%;
-    display: block;
-  }
-  pc-valediction {
-    height: 40%;
+  pc-stamp {
+    flex: 0 1 auto;
   }
 
+  pc-salutation {
+    flex: 0 1 30%;
+  }
+  pc-valediction {
+    flex: 1 1 30%;
+  }
   pc-control-buttons {
-    display: block;
+    flex: 0 1 auto;
   }
 
   button {

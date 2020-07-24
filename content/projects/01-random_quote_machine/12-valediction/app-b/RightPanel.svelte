@@ -65,6 +65,38 @@
     top: 25px;
     right: 25px;
   }
+
+  pc-salutation > p {
+    font-family: 'Great Vibes';
+    margin: 0;
+    padding: 2em 0 0 0;
+  }
+
+  pc-salutation > input {
+    padding: 0;
+    border: none;
+    margin-left: 0.5em;
+    width: 196px;
+    font-family: 'La Belle Aurore';
+    font-size: 1.3em;
+  }
+
+  pc-salutation > ::placeholder {
+    color: black;
+    opacity: 1;
+  }
+
+  pc-valediction > p:nth-of-type(1) {
+    font-family: 'Great Vibes';
+    margin: 0;
+    padding: 0;
+  }
+
+  pc-valediction > p:nth-of-type(2) {
+    margin: 0 0 0 0.25em;
+    font-family: 'La Belle Aurore';
+    font-size: 1.3em;
+  }
 </style>
 
 <pc-panel>
@@ -79,8 +111,12 @@
       src="https://res.cloudinary.com/learningsvelte/image/upload/v1595561153/learningsvelte/projects/random_quote_machine/cancel.png"
     />
   </pc-stamp>
-  <pc-salutation />
+  <pc-salutation>
+    <p>to:</p>
+    <input placeholder="Enter Your Name Here" />
+  </pc-salutation>
   <pc-valediction>
+    <p>from:</p>
     <p id="author">{currentAuthor}</p>
   </pc-valediction>
   <pc-control-buttons>
