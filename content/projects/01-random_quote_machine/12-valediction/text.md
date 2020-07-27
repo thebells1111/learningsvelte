@@ -27,7 +27,8 @@ pc-valediction > p:nth-of-type(1) {
 pc-valediction > p:nth-of-type(2) {
   margin: 0 0 0 0.25em;
   font-family: 'La Belle Aurore';
-  font-size: 1.3em;
+  font-size: 1.3em;  
+	transform: rotate(-1deg);
 }
 ```
 

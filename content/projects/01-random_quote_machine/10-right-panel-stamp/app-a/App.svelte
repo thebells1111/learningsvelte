@@ -48,13 +48,6 @@
     type="text/css"
     media="all"
   />
-  <link
-    rel="stylesheet"
-    id="font-awesome-css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-    type="text/css"
-    media="all"
-  />
 </svelte:head>
 
 <div class="container">

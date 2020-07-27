@@ -79,6 +79,7 @@
     width: 196px;
     font-family: 'La Belle Aurore';
     font-size: 1.3em;
+    transform: rotate(-0.5deg);
   }
 
   pc-salutation > ::placeholder {

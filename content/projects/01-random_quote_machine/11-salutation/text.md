@@ -34,7 +34,8 @@ pc-salutation > input {
   margin-left: 0.5em;
   width: 196px;
   font-family: 'La Belle Aurore';
-  font-size: 1.3em;
+  font-size: 1.3em;  
+	transform: rotate(-.5deg);
 }
 
 pc-salutation > ::placeholder {
