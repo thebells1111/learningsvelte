@@ -74,6 +74,8 @@
   function completeCode() {
     repl.set({
       components: chapter.app_b.map(clone),
+      foldLine: foldLine,
+      selectedComponent: selectedComponent,
     });
   }
 </script>
