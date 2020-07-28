@@ -1,10 +1,77 @@
 <script>
   import marked from 'marked';
-  let markdown = '# Marked in browser\n\nRendered by **marked**.';
-  $: content = marked(markdown);
+  import { onMount } from 'svelte';
+  marked.setOptions({
+    breaks: true,
+  });
+
+  onMount(() => {
+    htmlContent.innerHTML = marked(markdownContent);
+  });
+
+  function handleInput() {
+    htmlContent.innerHTML = marked(markdownContent);
+  }
+
+  let htmlContent;
+
+  let markdownContent = `# Learning Svelte is so cool!
+
+## It makes building apps so much better.
+### And here's some other cool stuff:
+  
+Heres some code, \`<div></div>\`, between 2 backticks.
+
+\`\`\`
+// this is multi-line code:
+
+function anotherExample(firstLine, lastLine) {
+  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
+    return multiLineCode;
+  }
+}
+\`\`\`
+  
+You can also make text **bold**... whoa!
+Or _italic_.
+Or... wait for it... **_both!_**
+And feel free to go crazy ~~crossing stuff out~~.
+
+There's also [links](https://www.freecodecamp.com), and
+> Block Quotes!
+
+And if you want to get really crazy, even tables:
+
+Wild Header | Crazy Header | Another Header?
+------------ | ------------- | ------------- 
+Your content can | be here, and it | can be here....
+And here. | Okay. | I think we get it.
+
+- And of course there are lists.
+  - Some are bulleted.
+     - With different indentation levels.
+        - That look like this.
+
+
+1. And there are numbererd lists too.
+1. Use just 1s if you want! 
+1. But the list goes on...
+- Even if you use dashes or asterisks.
+* And last but not least, let's not forget embedded images:
+
+![React Logo w/ Text](https://goo.gl/Umyytc)
+`;
 </script>
 
-<textarea id="editor" bind:value={markdown} />
-<div id="preview">
-  {@html content}
-</div>
+<svelte:head>
+  <script
+    src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js">
+
+  </script>
+</svelte:head>
+<textarea
+  id="editor"
+  on:keyup={handleInput}
+  bind:value={markdownContent}
+/>
+<div id="preview" bind:this={htmlContent} />
