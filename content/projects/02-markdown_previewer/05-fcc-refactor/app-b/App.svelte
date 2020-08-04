@@ -5,9 +5,7 @@
     breaks: true,
   });
 
-  onMount(() => {
-    htmlContent.innerHTML = marked(markdownContent);
-  });
+  onMount(handleInput);
 
   function handleInput() {
     htmlContent.innerHTML = marked(markdownContent);
@@ -31,9 +29,7 @@ import { onMount } from 'svelte';
     breaks: true,
   });
 
-  onMount(() => {
-    htmlContent.innerHTML = marked(markdownContent);
-  });
+  onMount(handleInput);
 
   function handleInput() {
     htmlContent.innerHTML = marked(markdownContent);

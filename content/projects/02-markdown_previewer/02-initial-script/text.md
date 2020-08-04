@@ -58,9 +58,7 @@ Finally, we'll create a variable that holds our initial `markdownContent` string
       breaks: true,
     });
 
-    onMount(() => {
-      htmlContent.innerHTML = marked(markdownContent);
-    });
+    onMount(handleInput);
 
     function handleInput() {
       htmlContent.innerHTML = marked(markdownContent);
