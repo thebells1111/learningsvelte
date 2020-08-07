@@ -49,6 +49,7 @@
 
   let width = process.browser ? window.innerWidth : 1000;
   let offset = 0;
+  let hideLeftPanel = false;
 
   $: selected = lookup.get(slug);
 
@@ -113,7 +114,7 @@
     .viewport {
       width: 100%;
       height: 100%;
-      display: grid;
+      display: flex;
       grid-template-columns: minmax(33.333%, var(--sidebar-large-w)) auto;
       grid-auto-rows: 100%;
       transition: none;
@@ -132,6 +133,50 @@
     border-right: 1px solid var(--second);
     background-color: var(--back);
     color: var(--text);
+    flex: 0 1 auto;
+    width: 100%;
+    min-width: 33.333%;
+    max-width: var(--sidebar-large-w);
+    position: relative;
+    transition: 0.1s;
+  }
+
+  .hidden-left-panel {
+    width: 0px;
+    transition: 0.1s;
+    right: 1px;
+    min-width: 0px;
+  }
+
+  .tutorial-repl {
+    flex: 1 1 auto;
+  }
+
+  .tutorial-text > button {
+    background-color: var(--prime);
+    color: white;
+    width: 16px;
+    height: 24px;
+    border-radius: 20px 0 0 20px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 46px;
+    right: 8px;
+    filter: drop-shadow(0px 0px 2px #777);
+    z-index: 6;
+  }
+
+  .hidden-left-panel > button {
+    right: -16px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .tutorial-text > button > span {
+    position: relative;
+    font-size: 1.1em;
+    font-weight: 700;
   }
 
   .chapter-markup {
@@ -250,7 +295,14 @@
 
 <div class="tutorial-outer">
   <div class="viewport offset-{offset}">
-    <div class="tutorial-text">
+    <div class="tutorial-text" class:hidden-left-panel={hideLeftPanel}>
+      <button
+        on:click={() => {
+          hideLeftPanel = !hideLeftPanel;
+        }}
+      >
+        <span>{hideLeftPanel ? '»' : '«'}</span>
+      </button>
       <div class="table-of-contents">
         <TableOfContents {TOC} {slug} {title} />
       </div>
