@@ -153,30 +153,33 @@
   }
 
   .tutorial-text > button {
-    background-color: var(--prime);
-    color: white;
-    width: 16px;
-    height: 24px;
-    border-radius: 20px 0 0 20px;
+    background-color: var(--back);
+    color: gray;
     border: none;
+    width: 150px;
     padding: 0;
     margin: 0;
     position: absolute;
-    top: 46px;
-    right: 8px;
-    filter: drop-shadow(0px 0px 2px #777);
+    top: 105px;
+    left: -63px;
+    transform: rotate(-90deg);
     z-index: 6;
+    text-align: left;
   }
 
   .hidden-left-panel > button {
-    right: -16px;
-    border-radius: 0 20px 20px 0;
+    left: -62px;
   }
 
   .tutorial-text > button > span {
     position: relative;
     font-size: 1.1em;
     font-weight: 700;
+  }
+
+  :global(.tutorial-text > button > span > span) {
+    margin: 0;
+    margin-left: 9px;
   }
 
   .chapter-markup {
@@ -301,7 +304,9 @@
           hideLeftPanel = !hideLeftPanel;
         }}
       >
-        <span>{hideLeftPanel ? '»' : '«'}</span>
+        <span>
+          {@html hideLeftPanel ? 'expand <span>tutorial</span>' : 'collapse tutorial'}
+        </span>
       </button>
       <div class="table-of-contents">
         <TableOfContents {TOC} {slug} {title} />
