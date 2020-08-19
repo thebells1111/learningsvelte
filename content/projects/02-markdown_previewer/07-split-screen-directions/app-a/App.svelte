@@ -33,6 +33,7 @@
   let markdownContent = `# Learning Svelte is so cool!
 
 ## Markdown is pretty cool too!
+### And here's some things you can do with Markdown: 
 `;
 </script>
 
