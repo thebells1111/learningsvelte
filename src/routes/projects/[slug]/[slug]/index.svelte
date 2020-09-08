@@ -40,6 +40,7 @@
   }
 
   let TOC = tutorials[tutorial.slug];
+  let tutorialTitle = TOC.tutorial.title.replace('<br>', ' ');
 
   let repl;
   let prev;
@@ -288,11 +289,11 @@
   }
 </style>
 
-<!-- <svelte:head>
-	<title>{selected.section.title} / {selected.chapter.title} • Svelte Tutorial</title>
+<svelte:head>
+  <title>{title} • {tutorialTitle}</title>
 
-	<meta name="Description" content="{selected.section.title} / {selected.chapter.title}">
-</svelte:head> -->
+  <!-- <meta name="Description" content="{selected.section.title} / {selected.chapter.title}"> -->
+</svelte:head>
 
 <svelte:window bind:innerWidth={width} />
 

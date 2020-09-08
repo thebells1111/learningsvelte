@@ -53,6 +53,11 @@
   }
 </style>
 
+<svelte:head>
+  <title>Learning Svelte - Projects</title>
+  <meta name="Description" content="Learning Svelte - Projects" />
+</svelte:head>
+
 <section>
   {#each tutorials as tutorial}
     <a href="projects/{tutorial.slug}/intro">

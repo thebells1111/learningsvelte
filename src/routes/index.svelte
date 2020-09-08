@@ -35,7 +35,6 @@
 
 <svelte:head>
   <title>Learning Svelte</title>
-
   <meta name="Description" content="Learning Svelte" />
 </svelte:head>
 
