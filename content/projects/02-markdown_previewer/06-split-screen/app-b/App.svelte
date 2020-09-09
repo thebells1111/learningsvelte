@@ -14,7 +14,7 @@
     htmlContent.innerHTML = marked(markdownContent);
   }
 
-  function splitPane(node) {
+  function splitPane() {
     Split(['#editor', '#preview'], {
       direction: 'vertical',
       elementStyle: (dimension, size, gutterSize) => ({

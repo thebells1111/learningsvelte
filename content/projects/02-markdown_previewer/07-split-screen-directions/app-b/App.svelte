@@ -16,8 +16,8 @@
     htmlContent.innerHTML = marked(markdownContent);
   }
 
-  function splitPane(node, direction) {
-    function split(direction) {
+  function splitPane() {
+    function split() {
       splitInstance = Split(['#editor', '#preview'], {
         direction: containerWidth > 600 ? 'horizontal' : 'vertical',
         elementStyle: (dimension, size, gutterSize) => ({
@@ -32,12 +32,12 @@
         gutterSize: 2,
       });
     }
-    split(direction);
+    split();
 
     return {
       update() {
         splitInstance.destroy();
-        split(direction);
+        split();
       },
     };
   }
@@ -81,7 +81,7 @@
 <s-panel-container
   style="--orientation: {containerWidth > 600 ? 'row' : 'column'}"
   bind:clientWidth={containerWidth}
-  use:splitPane={containerWidth > 600 ? 'horizontal' : 'vertical'}
+  use:splitPane={containerWidth > 600}
 >
   <textarea
     id="editor"
