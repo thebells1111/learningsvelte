@@ -10,6 +10,8 @@
 
   let htmlContent;
   let containerWidth;
+  $: splitDirection =
+    containerWidth > 600 ? 'horizontal' : 'vertical';
   let splitInstance;
 
   function handleInput() {
@@ -19,7 +21,7 @@
   function splitPane() {
     function split() {
       splitInstance = Split(['#editor', '#preview'], {
-        direction: containerWidth > 600 ? 'horizontal' : 'vertical',
+        direction: splitDirection,
         elementStyle: (dimension, size, gutterSize) => ({
           'flex-basis': `calc(${size}% - ${gutterSize}px)`,
         }),
@@ -81,7 +83,7 @@
 <s-panel-container
   style="--orientation: {containerWidth > 600 ? 'row' : 'column'}"
   bind:clientWidth={containerWidth}
-  use:splitPane={containerWidth > 600}
+  use:splitPane={splitDirection}
 >
   <textarea
     id="editor"
