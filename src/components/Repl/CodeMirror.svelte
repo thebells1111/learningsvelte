@@ -18,7 +18,7 @@
   import Message from './Message.svelte';
 
   const dispatch = createEventDispatcher();
-  const { foldLine } = getContext('REPL');
+  const { foldLine, rebundle } = getContext('REPL');
 
   export let readonly = false;
   export let errorLoc = null;
@@ -69,6 +69,10 @@
     return editor.getHistory();
   }
 
+  export function getValue() {
+    return editor.getValue();
+  }
+
   export function setHistory(history) {
     editor.setHistory(history);
   }
@@ -76,6 +80,7 @@
   export function clearHistory() {
     if (editor) editor.clearHistory();
   }
+
 
   export function foldCode(line) {
     if (editor && Number(line)) {
@@ -257,7 +262,8 @@
 
   function sleep(ms) {
     return new Promise((fulfil) => setTimeout(fulfil, ms));
-  }
+  }  
+  
 </script>
 
 <style>

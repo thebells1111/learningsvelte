@@ -6,7 +6,8 @@
   import ModuleEditor from './Input/ModuleEditor.svelte';
   import Output from './Output/index.svelte';
   import Bundler from './Bundler.js';
-  import { is_browser } from './env.js';
+  import { is_browser } from './env.js';  
+  import sveltePlugin from './prettier-plugin'
 
   export let workersUrl;
   export let packagesUrl = 'https://unpkg.com';
@@ -230,6 +231,22 @@
   $: if (output && $selected) {
     output.update($selected, $compile_options);
   }
+
+  function handleKeydown(event) {
+    if (
+      event.shiftKey &&
+      event.altKey &&
+      (event.key === "f" || event.key === "F")
+    ) {
+      let code = sveltePlugin.format(module_editor.getValue(), {
+      parser: "svelte",
+      plugins: [sveltePlugin],
+    });
+     module_editor.update(code)
+     console.log('formatted')
+     //rebundle();
+    }
+  }
 </script>
 
 <style>
@@ -270,6 +287,7 @@
   }
 </style>
 
+<svelte:window on:keydown={handleKeydown} />
 <div class="container svelte-repl" class:orientation>
   <SplitPane
     type={orientation === 'rows' ? 'vertical' : 'horizontal'}

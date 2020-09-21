@@ -19,6 +19,7 @@
     "cookie": "^0.4.1",
     "devalue": "^2.0.1",
     "do-not-zip": "^1.0.0",
+    "escodegen": "^2.0.0",
     "estree-walker": "^0.9.0",
     "flru": "^1.0.2",
     "httpie": "^1.1.2",
