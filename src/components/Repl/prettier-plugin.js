@@ -5,6 +5,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 const doc = require('prettier/doc');
 const { format } = require('prettier/standalone');
 const htmlPlugin = require('prettier/parser-html');
+const jsPlugin = require('prettier/parser-babel');
+const cssPlugin = require('prettier/parser-postcss');
 const escodegen = require('escodegen');
 
 // import * as doc from 'prettier/doc';
@@ -13,6 +15,8 @@ const escodegen = require('escodegen');
 // import escodegen from 'escodegen';
 
 let htmlCode = '';
+let jsCode = '';
+let cssCode = '';
 
 // @see http://xahlee.info/js/html5_non-closing_tag.html
 const selfClosingTags = [
@@ -924,13 +928,21 @@ function print(path, options$$1, print) {
     case 'Spread':
       return concat([line, '{...', printJS(path, print, 'expression'), '}']);
     case 'Script':
-      htmlCode = format(`<script>${getSnippedContent(node)}</script>`, {
+      jsCode = format(getSnippedContent(node), {
+        parser: 'babel',
+        plugins: [jsPlugin],
+      });
+      htmlCode = format(`<script>${jsCode}</script>`, {
         parser: 'html',
         plugins: [htmlPlugin],
       });
       return htmlCode;
     case 'Style':
-      htmlCode = format(`<style>${getSnippedContent(node)}</style>`, {
+      cssCode = format(getSnippedContent(node), {
+        parser: 'css',
+        plugins: [cssPlugin],
+      });
+      htmlCode = format(`<style>${cssCode}</style>`, {
         parser: 'html',
         plugins: [htmlPlugin],
       });
