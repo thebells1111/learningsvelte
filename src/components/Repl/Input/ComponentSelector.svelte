@@ -62,10 +62,8 @@
 		}
 	}
 
-	function selectInput(event) {
-		setTimeout(() => {
-			event.target.select();
-		});
+	function focus(target) {
+		target.select();
 	}
 
 	let uid = 1;
@@ -294,12 +292,11 @@
 						{#if component === editing}
 							<span class="input-sizer">{editing.name + (/\./.test(editing.name) ? '' : `.${editing.type}`)}</span>
 
-							<!-- svelte-ignore a11y-autofocus -->
+						
 							<input
-								autofocus
+								use:focus								
 								spellcheck={false}
-								bind:value={editing.name}
-								on:focus={selectInput}
+								bind:value={editing.name}							
 								on:blur={closeEdit}
 								on:keydown={e => e.which === 13 && !isComponentNameUsed(editing) && e.target.blur()}
 								class:duplicate={isComponentNameUsed(editing)}
