@@ -8,6 +8,7 @@ import {
   link_renderer,
 } from '@sveltejs/site-kit/utils/markdown';
 import { highlight } from '../../../../utils/highlight';
+import dirTree from '../../../../utils/directory-tree';
 
 const cache = new Map();
 
@@ -37,7 +38,7 @@ function get_chapters(directory) {
   const files = new Set();
   fs.readdirSync(`content/projects/${directory}`)
     .filter((dir) => /^\d+/.test(dir))
-    .forEach((chapter, index) => {
+    .forEach((chapter) => {
       try {
         const slug = chapter.replace(/^\d+-/, '');
         if (slugs.has(slug)) throw new Error(`Duplicate slug: ${slug}`);
@@ -67,8 +68,6 @@ function get_tutorial(tutorial, slug) {
   const dir = `content/projects/${tutorial}/${chapter}`;
 
   const markdown = fs.readFileSync(`${dir}/text.md`, 'utf-8');
-  const app_a = fs.readdirSync(`${dir}/app-a`);
-  const app_b = fs.existsSync(`${dir}/app-b`) && fs.readdirSync(`${dir}/app-b`);
 
   const { content, metadata } = extract_frontmatter(markdown);
 
@@ -103,22 +102,15 @@ function get_tutorial(tutorial, slug) {
 
   let html = marked(content, { renderer });
 
-  function get_file(stage, file) {
-    const ext = path.extname(file);
-    const name = file.slice(0, -ext.length);
-    const type = ext.slice(1);
-
-    return {
-      name,
-      type,
-      source: fs.readFileSync(`${dir}/${stage}/${file}`, 'utf-8'),
-    };
+  function get_file(stage) {
+    let folders = dirTree(`${dir}/${stage}`);
+    return folders.children;
   }
 
   return {
     html,
-    app_a: app_a.map((file) => get_file('app-a', file)),
-    app_b: app_b && app_b.map((file) => get_file('app-b', file)),
+    app_a: get_file('app-a'),
+    app_b: fs.existsSync(`${dir}/app-b`) && get_file('app-b'),
     prev: prevChapter,
     next: nextChapter,
     metadata: metadata,

@@ -24,6 +24,7 @@
   import TableOfContents from './_TableOfContents.svelte';
 
   import { rollupUrl, svelteUrl } from '../../../../config';
+  import folderToComponents from '../../../../utils/folderToComponents';
 
   let tutorials = getContext('tutorials');
   export let slug;
@@ -65,7 +66,7 @@
       scrollable.scrollTop = 0;
     }
     repl.set({
-      components: chapter.app_a.map(clone),
+      components: folderToComponents(chapter.app_a),
       foldLine: foldLine,
       selectedComponent: selectedComponent,
     });
@@ -75,7 +76,7 @@
 
   function completeCode() {
     repl.set({
-      components: chapter.app_b.map(clone),
+      components: folderToComponents(chapter.app_b),
       foldLine: foldLine,
       selectedComponent: selectedComponent,
     });
