@@ -27,7 +27,7 @@
     "marked": "^0.7.0",
     "pg": "^7.18.2",
     "polka": "next",
-    "prismjs": "^1.21.0",
+    "prismjs": "^1.23.0",
     "sirv": "^0.4.0",
     "sourcemap-codec": "^1.4.6",
     "svelte-json-tree": "0.0.5",
