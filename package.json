@@ -14,7 +14,7 @@
   "dependencies": {
     "@polka/redirect": "^1.0.0-next.7",
     "@polka/send": "^1.0.0-next.7",
-    "codemirror": "^5.58.0",
+    "codemirror": "^5.58.2",
     "compression": "^1.7.1",
     "cookie": "^0.4.1",
     "devalue": "^2.0.1",
